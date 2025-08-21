@@ -180,15 +180,19 @@ function renderPublicationCards(publications) {
   });
   // Add or update the See more button
   let btn = document.getElementById("show-more-publications");
+  const hiddenCount = Math.max(0, publications.length - 3);
   if (!btn) {
     btn = document.createElement("button");
     btn.id = "show-more-publications";
     btn.className =
       "mt-4 px-4 py-2 rounded-full border border-brand/30 text-brand font-semibold hover:bg-brand/5 text-sm";
     btn.style.display = "block";
-    btn.style.margin = "0 auto";
-    btn.textContent = "See more +";
+    btn.style.margin = "32px auto 0 auto";
+    btn.textContent = hiddenCount > 0 ? `See more + (${hiddenCount})` : "See more +";
     list.parentNode.insertBefore(btn, list.nextSibling);
+  } else {
+    btn.style.margin = "32px auto 0 auto";
+    btn.textContent = hiddenCount > 0 ? `See more + (${hiddenCount})` : "See more +";
   }
   if (publications.length > 3) {
     btn.style.display = "block";
