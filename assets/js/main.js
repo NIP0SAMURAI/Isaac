@@ -180,19 +180,16 @@ function renderPublicationCards(publications) {
   });
   // Add or update the See more button
   let btn = document.getElementById("show-more-publications");
-  const hiddenCount = Math.max(0, publications.length - 3);
   if (!btn) {
     btn = document.createElement("button");
     btn.id = "show-more-publications";
     btn.className =
-      "mt-4 px-4 py-2 rounded-full border border-brand/30 text-brand font-semibold hover:bg-brand/5 text-sm";
+      "px-4 py-2 rounded-full border border-brand/30 text-brand font-semibold hover:bg-brand/5 text-sm mt-8";
     btn.style.display = "block";
-    btn.style.margin = "32px auto 0 auto";
-    btn.textContent = hiddenCount > 0 ? `See more + (${hiddenCount})` : "See more +";
+    btn.style.margin = "0 auto";
+    const hiddenCount = publications.length - 3;
+    btn.textContent = `Show more (${hiddenCount})`;
     list.parentNode.insertBefore(btn, list.nextSibling);
-  } else {
-    btn.style.margin = "32px auto 0 auto";
-    btn.textContent = hiddenCount > 0 ? `See more + (${hiddenCount})` : "See more +";
   }
   if (publications.length > 3) {
     btn.style.display = "block";
@@ -201,9 +198,36 @@ function renderPublicationCards(publications) {
         if (i > 2) item.style.display = "";
       });
       btn.style.display = "none";
+
+      // Create and show the See less button
+      let lessBtn = document.getElementById("see-less-publications");
+      if (!lessBtn) {
+        lessBtn = document.createElement("button");
+        lessBtn.id = "see-less-publications";
+        lessBtn.className =
+          "px-4 py-2 rounded-full border border-brand/30 text-brand font-semibold hover:bg-brand/5 text-sm mt-8";
+        lessBtn.style.display = "block";
+        lessBtn.style.margin = "0 auto";
+        lessBtn.textContent = "Show less";
+        btn.parentNode.insertBefore(lessBtn, btn.nextSibling);
+      } else {
+        lessBtn.style.display = "block";
+      }
+      lessBtn.onclick = function () {
+        list.querySelectorAll(".publication-list-item").forEach((item, i) => {
+          if (i > 2) item.style.display = "none";
+        });
+        btn.style.display = "block";
+        lessBtn.style.display = "none";
+      };
     };
+    // Hide See less button initially
+    let lessBtn = document.getElementById("see-less-publications");
+    if (lessBtn) lessBtn.style.display = "none";
   } else {
     btn.style.display = "none";
+    let lessBtn = document.getElementById("see-less-publications");
+    if (lessBtn) lessBtn.style.display = "none";
   }
   // Re-attach copy citation listeners
   document.querySelectorAll(".btn-copy-citation").forEach((btn) => {
