@@ -1,0 +1,393 @@
+/* Force 32px margin above show-more-publications button */
+#show-more-publications {
+  margin-top: 32px !important;
+}
+/* Responsive name for top left corner */
+.name-short {
+  display: inline-block;
+}
+.name-long {
+  display: none;
+}
+@media (min-width: 600px) {
+  .name-short {
+    display: none !important;
+  }
+  .name-long {
+    display: inline-block !important;
+  }
+}
+/* Project card styles from reference */
+/* Project card exact spacing and margin fix */
+.project-card {
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 1rem !important;
+  font-size: 0.8rem !important;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.13);
+  border: 1px solid #e5e7eb;
+  background-color: #fff;
+  overflow: hidden;
+  margin: 0 !important; /* Remove any margin, use grid gap only */
+  position: relative;
+  padding: 0; /* No outer padding, use inner for content */
+}
+.project-card > .p-5,
+.project-card > .p-4,
+.project-card > .p-3,
+.project-card
+  > div:not(.aspect-\[16\/10\]):not(.project-card-image):not(.aspect-ratio) {
+  padding: 1.2rem !important;
+  font-size: 0.8rem !important;
+}
+.project-card:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 7px 14px rgba(0, 0, 0, 0.11)) brightness(1.04);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.16);
+}
+/* General container for sections */
+.container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Section spacing */
+.section-publications,
+.section-projects,
+.section-about,
+.section-contact {
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+}
+@media (min-width: 768px) {
+  .section-publications,
+  .section-projects,
+  .section-about,
+  .section-contact {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+.section-projects {
+  background-color: #f5faf7; /* even lighter green tint */
+}
+
+.section-contact {
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Section header */
+.section-header {
+  max-width: 42rem;
+  margin-left: 0;
+  padding-left: 1rem;
+}
+@media (min-width: 640px) {
+  .section-header {
+    padding-left: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .section-header {
+    padding-left: 2rem;
+  }
+}
+
+/* Publication list spacing */
+.publication-list {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: stretch;
+  max-width: none;
+  padding-left: 0;
+}
+
+/* Project list grid */
+/* Project list grid (rebuilt) */
+/* Project list grid from reference */
+.project-list {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .project-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .project-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Project card styles (rebuilt) */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px -8px #e8e8e8;
+  border: 1px solid #e6ebe5;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.project-card:hover {
+  box-shadow: 0 16px 32px -8px #d6d6d691;
+  transform: translateY(-2px) scale(1.02);
+}
+.project-card-image {
+  width: 100%;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: #f5faf7;
+}
+.project-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+/* Remove all other .project-list media queries below to avoid conflicts */
+
+/* About content grid */
+.about-content {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  /* Large screens: image column (fixed) + content column (fluid) */
+  .about-content {
+    grid-template-columns: 340px 1fr;
+    align-items: start;
+    gap: 3rem;
+  }
+  /* ensure the image container keeps its square aspect and fits the column */
+  .about-content .aspect-square {
+    width: 100%;
+    height: auto;
+    min-width: 0;
+  }
+}
+
+/* Contact content grid */
+.contact-content {
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .contact-content {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* About stats: hover background */
+.stat-card {
+  transition: background-color 0.2s ease;
+}
+.stat-card:hover {
+  background-color: #e9f3ea;
+}
+
+/* Footer */
+.site-footer {
+  padding-top: 0.75rem;
+  padding-bottom: calc(0.75rem + 8px);
+  margin-top: 0.5rem;
+}
+.footer-white {
+  background: #fff !important;
+}
+.footer-content {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.section-contact {
+  background-color: #f5faf7; /* even lighter green tint */
+}
+@media (min-width: 640px) {
+  .footer-content {
+    flex-direction: row;
+    gap: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .footer-content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+/* Publication card styles extracted from Tailwind utility classes */
+.publication-card {
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  background-color: #fff;
+  padding: 1.2rem;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.13);
+  transition: box-shadow 0.2s;
+  font-size: 0.8rem;
+}
+@media (min-width: 768px) {
+  .publication-card {
+    padding: 1.4rem;
+  }
+}
+.publication-card:hover {
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.16);
+}
+:focus-visible {
+  outline: 2px solid #386939;
+  outline-offset: 2px;
+}
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Footer icons: perfect bottom alignment and visual consistency */
+.footer-icons {
+  margin-top: -8px !important;
+  align-items: flex-end;
+}
+.footer-icons a {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+.footer-icons a svg {
+  display: block; /* remove baseline gaps */
+  width: 22px;
+  height: 22px;
+}
+/* Subtle per-icon optical nudges */
+.footer-icons a[aria-label="Google Scholar"] svg {
+  transform: translateY(0.5px);
+}
+.footer-icons a[aria-label="LinkedIn"] svg {
+  transform: translateY(0.5px);
+}
+.footer-icons a[aria-label="YouTube"] svg {
+  transform: translateY(0.5px);
+}
+
+/* Footer icons: normalize size and align to bottom visually */
+.footer-icons a {
+  display: inline-flex;
+  align-items: flex-end;
+  width: 28px; /* square hit area */
+  height: 28px;
+  justify-content: center;
+}
+.footer-icons a svg {
+  display: block; /* prevent baseline gaps */
+  width: 22px;
+  height: 22px;
+}
+/* Optional tiny nudges for optical alignment */
+.footer-icons a[aria-label="Google Scholar"] svg {
+  transform: translateY(0.5px);
+}
+.footer-icons a[aria-label="LinkedIn"] svg {
+  transform: translateY(0.5px);
+}
+.footer-icons a[aria-label="YouTube"] svg {
+  transform: translateY(0.5px);
+}
+.project-card > *,
+.project-card .p-5,
+.project-card .p-4,
+.project-card .p-3 {
+  padding: initial !important;
+  font-size: initial !important;
+}
+.project-card:hover {
+  /* Grow 2%, add a drop shadow, and slightly lighten */
+  filter: drop-shadow(0 7px 14px #c7c7c7) brightness(1.04);
+}
+.hero-media {
+  position: relative;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  /* Give the container an intrinsic size so absolutely-positioned images don't collapse it */
+  width: 352px; /* +10% from 320 */
+  height: 264px; /* 4:3 */
+  min-width: 352px;
+  min-height: 264px;
+  flex: 0 0 auto;
+  aspect-ratio: 4/3;
+  background: #fff;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+@media (min-width: 1024px) {
+  .hero-media {
+    width: 492px; /* +10% from 448 */
+    height: 369px; /* 4:3 */
+    min-width: 492px;
+    min-height: 369px;
+  }
+}
+.hover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.25s ease;
+}
+.hover-img--hover {
+  opacity: 0;
+}
+.hero-media:hover .hover-img--hover {
+  opacity: 1;
+}
+.hero-media:hover .hover-img--base {
+  opacity: 0;
+}
+/* Footer icon color and hover effects */
+.footer-icons-grey a,
+.footer-icons-grey a svg,
+.footer-icons-grey .brand-icon {
+  color: #d1d5db !important; /* Tailwind's neutral-300 */
+  fill: #d1d5db !important;
+  transition: color 0.18s, fill 0.18s;
+}
+.footer-icons-grey a:hover,
+.footer-icons-grey a:hover svg,
+.footer-icons-grey a:hover .brand-icon {
+  color: #2c4d2d !important;
+  fill: #2c4d2d !important;
+}
