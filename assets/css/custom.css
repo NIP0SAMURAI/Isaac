@@ -1,3 +1,17 @@
+@media (min-width: 734px) and (max-width: 1023px) {
+  .intro-align-fix {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+  .intro-align-fix .section-header {
+    margin-left: 0 !important;
+    padding-left: 2rem !important;
+    text-align: left !important;
+  }
+}
+.section-header {
+  text-align: left !important;
+}
 /* Force 32px margin above see-less-publications button */
 #see-less-publications {
   margin-top: 32px !important;
@@ -77,6 +91,11 @@
   padding-top: 4rem;
   padding-bottom: 6rem;
 }
+
+/* Reduce bottom padding for publications section only */
+.section-publications {
+  padding-bottom: 3.5rem !important;
+}
 @media (min-width: 768px) {
   .section-publications,
   .section-projects,
@@ -84,6 +103,11 @@
   .section-contact {
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+
+  /* Reduce bottom padding for publications section only on md+ */
+  .section-publications {
+    padding-bottom: 3.5rem !important;
   }
 }
 .section-projects {
@@ -231,7 +255,6 @@
   padding-right: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
   align-items: center;
   justify-content: space-between;
 }
@@ -280,7 +303,6 @@ html:focus-within {
 
 /* Footer icons: perfect bottom alignment and visual consistency */
 .footer-icons {
-  margin-top: -8px !important;
   align-items: flex-end;
 }
 .footer-icons a {
