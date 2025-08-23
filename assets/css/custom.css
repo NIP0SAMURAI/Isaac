@@ -137,8 +137,14 @@
 .section-projects,
 .section-about,
 .section-contact {
-  padding-top: 4rem;
-  padding-bottom: 6rem;
+  scroll-margin-top: 80px;
+}
+.section-publications,
+.section-projects,
+.section-about,
+.section-contact {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 /* Reduce bottom padding for publications section only */
@@ -150,8 +156,8 @@
   .section-projects,
   .section-about,
   .section-contact {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   /* Reduce bottom padding for publications section only on md+ */
@@ -166,6 +172,7 @@
 .section-contact {
   border-top: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
+  padding-top: 2rem !important;
 }
 
 /* Section header */
