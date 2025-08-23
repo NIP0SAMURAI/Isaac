@@ -1,3 +1,45 @@
+/* Publications filter UI styling */
+#publication-filter-form {
+  border-radius: 0.9rem;
+  border: none;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  background: none;
+}
+#publication-filter-form input,
+#publication-filter-form select {
+  border-radius: 0.7rem;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #6b7280;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+#publication-filter-form input:focus,
+#publication-filter-form select:focus {
+  border-color: #d1d5db;
+  box-shadow: none;
+}
+#publication-filter-form option {
+  color: #6b7280;
+}
+@media (max-width: 600px) {
+  #publication-filter-form {
+    padding: 0.7rem 0.5rem;
+    gap: 0.5rem;
+  }
+  #publication-filter-form input,
+  #publication-filter-form select {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.7rem;
+  }
+}
 @media (min-width: 734px) and (max-width: 1023px) {
   .intro-align-fix {
     align-items: flex-start !important;
