@@ -120,16 +120,82 @@ function parseCSV(text) {
   });
 }
 
+
+let allPublications = [];
 async function fetchAndRenderPublications() {
   try {
     const res = await fetch(PUBLICATIONS_CSV_URL);
     if (!res.ok) throw new Error("Failed to fetch publications CSV");
     const csv = await res.text();
     const data = parseCSV(csv);
+    allPublications = data;
+    populatePublicationFilterYears(data);
+    populatePublicationFilterTypes(data);
     renderPublicationCards(data);
+    setupPublicationFilters();
   } catch (e) {
     console.error("Error loading publications from Google Sheets:", e);
   }
+}
+
+function populatePublicationFilterYears(publications) {
+  const yearSelect = document.getElementById('publication-year');
+  if (!yearSelect) return;
+  const years = Array.from(new Set(publications.map(pub => pub['year']).filter(Boolean))).sort((a,b)=>b-a);
+  years.forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.textContent = y;
+    yearSelect.appendChild(opt);
+  });
+}
+
+function populatePublicationFilterTypes(publications) {
+  const typeSelect = document.getElementById('publication-type');
+  if (!typeSelect) return;
+  // Remove all but the first option
+  while (typeSelect.options.length > 1) typeSelect.remove(1);
+  const types = Array.from(new Set(publications.map(pub => (pub['type of publication']||'').trim()).filter(Boolean))).sort();
+  types.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t;
+    opt.textContent = t;
+    typeSelect.appendChild(opt);
+  });
+}
+
+function setupPublicationFilters() {
+  const form = document.getElementById('publication-filter-form');
+  if (!form) return;
+  form.addEventListener('input', function() {
+    filterAndRenderPublications();
+  });
+}
+
+function filterAndRenderPublications() {
+  let filtered = allPublications;
+  const search = document.getElementById('publication-search').value.trim().toLowerCase();
+  const type = document.getElementById('publication-type').value;
+  const year = document.getElementById('publication-year').value;
+  const importance = document.getElementById('publication-importance').value;
+  if (search) {
+    filtered = filtered.filter(pub =>
+      Object.values(pub).some(val => (val||'').toLowerCase().includes(search))
+    );
+  }
+  if (type) {
+    filtered = filtered.filter(pub => (pub['type of publication']||'').trim().toLowerCase() === type.trim().toLowerCase());
+  }
+  if (year) {
+    filtered = filtered.filter(pub => (pub['year']||'') === year);
+  }
+  if (importance === 'first') {
+    filtered = filtered.filter(pub => {
+      const authors = (pub['authors']||'').split(',');
+      return authors.length && authors[0].toLowerCase().includes('løge') || authors[0].toLowerCase().includes('loge');
+    });
+  }
+  renderPublicationCards(filtered);
 }
 
 async function fetchAndRenderProjects() {
@@ -188,7 +254,7 @@ function renderPublicationCards(publications) {
     btn.style.display = "block";
     btn.style.margin = "0 auto";
     const hiddenCount = publications.length - 3;
-    btn.textContent = `Show more (${hiddenCount})`;
+    btn.textContent = `Show more (+${hiddenCount})`;
     list.parentNode.insertBefore(btn, list.nextSibling);
   }
   if (publications.length > 3) {
