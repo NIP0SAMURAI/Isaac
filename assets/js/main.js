@@ -120,7 +120,6 @@ function parseCSV(text) {
   });
 }
 
-
 let allPublications = [];
 async function fetchAndRenderPublications() {
   try {
@@ -139,11 +138,13 @@ async function fetchAndRenderPublications() {
 }
 
 function populatePublicationFilterYears(publications) {
-  const yearSelect = document.getElementById('publication-year');
+  const yearSelect = document.getElementById("publication-year");
   if (!yearSelect) return;
-  const years = Array.from(new Set(publications.map(pub => pub['year']).filter(Boolean))).sort((a,b)=>b-a);
-  years.forEach(y => {
-    const opt = document.createElement('option');
+  const years = Array.from(
+    new Set(publications.map((pub) => pub["year"]).filter(Boolean))
+  ).sort((a, b) => b - a);
+  years.forEach((y) => {
+    const opt = document.createElement("option");
     opt.value = y;
     opt.textContent = y;
     yearSelect.appendChild(opt);
@@ -151,13 +152,19 @@ function populatePublicationFilterYears(publications) {
 }
 
 function populatePublicationFilterTypes(publications) {
-  const typeSelect = document.getElementById('publication-type');
+  const typeSelect = document.getElementById("publication-type");
   if (!typeSelect) return;
   // Remove all but the first option
   while (typeSelect.options.length > 1) typeSelect.remove(1);
-  const types = Array.from(new Set(publications.map(pub => (pub['type of publication']||'').trim()).filter(Boolean))).sort();
-  types.forEach(t => {
-    const opt = document.createElement('option');
+  const types = Array.from(
+    new Set(
+      publications
+        .map((pub) => (pub["type of publication"] || "").trim())
+        .filter(Boolean)
+    )
+  ).sort();
+  types.forEach((t) => {
+    const opt = document.createElement("option");
     opt.value = t;
     opt.textContent = t;
     typeSelect.appendChild(opt);
@@ -165,34 +172,46 @@ function populatePublicationFilterTypes(publications) {
 }
 
 function setupPublicationFilters() {
-  const form = document.getElementById('publication-filter-form');
+  const form = document.getElementById("publication-filter-form");
   if (!form) return;
-  form.addEventListener('input', function() {
+  form.addEventListener("input", function () {
     filterAndRenderPublications();
   });
 }
 
 function filterAndRenderPublications() {
   let filtered = allPublications;
-  const search = document.getElementById('publication-search').value.trim().toLowerCase();
-  const type = document.getElementById('publication-type').value;
-  const year = document.getElementById('publication-year').value;
-  const importance = document.getElementById('publication-importance').value;
+  const search = document
+    .getElementById("publication-search")
+    .value.trim()
+    .toLowerCase();
+  const type = document.getElementById("publication-type").value;
+  const year = document.getElementById("publication-year").value;
+  const importance = document.getElementById("publication-importance").value;
   if (search) {
-    filtered = filtered.filter(pub =>
-      Object.values(pub).some(val => (val||'').toLowerCase().includes(search))
+    filtered = filtered.filter((pub) =>
+      Object.values(pub).some((val) =>
+        (val || "").toLowerCase().includes(search)
+      )
     );
   }
   if (type) {
-    filtered = filtered.filter(pub => (pub['type of publication']||'').trim().toLowerCase() === type.trim().toLowerCase());
+    filtered = filtered.filter(
+      (pub) =>
+        (pub["type of publication"] || "").trim().toLowerCase() ===
+        type.trim().toLowerCase()
+    );
   }
   if (year) {
-    filtered = filtered.filter(pub => (pub['year']||'') === year);
+    filtered = filtered.filter((pub) => (pub["year"] || "") === year);
   }
-  if (importance === 'first') {
-    filtered = filtered.filter(pub => {
-      const authors = (pub['authors']||'').split(',');
-      return authors.length && authors[0].toLowerCase().includes('løge') || authors[0].toLowerCase().includes('loge');
+  if (importance === "first") {
+    filtered = filtered.filter((pub) => {
+      const authors = (pub["authors"] || "").split(",");
+      return (
+        (authors.length && authors[0].toLowerCase().includes("løge")) ||
+        authors[0].toLowerCase().includes("loge")
+      );
     });
   }
   renderPublicationCards(filtered);
@@ -244,8 +263,9 @@ function renderPublicationCards(publications) {
       pub["copy citation text"] || ""
     }\">Copy citation</button>\n          </div>\n        </article>\n      </li>\n    `;
   });
-  // Add or update the See more button
+  // Add or update the Show more button with dynamic count
   let btn = document.getElementById("show-more-publications");
+  const hiddenCount = publications.length - 3;
   if (!btn) {
     btn = document.createElement("button");
     btn.id = "show-more-publications";
@@ -253,12 +273,11 @@ function renderPublicationCards(publications) {
       "px-4 py-2 rounded-full border border-brand/30 text-brand font-semibold hover:bg-brand/5 text-sm mt-8";
     btn.style.display = "block";
     btn.style.margin = "0 auto";
-    const hiddenCount = publications.length - 3;
-    btn.textContent = `Show more (+${hiddenCount})`;
     list.parentNode.insertBefore(btn, list.nextSibling);
   }
   if (publications.length > 3) {
     btn.style.display = "block";
+    btn.textContent = `Show more (+${hiddenCount})`;
     btn.onclick = function () {
       list.querySelectorAll(".publication-list-item").forEach((item, i) => {
         if (i > 2) item.style.display = "";
