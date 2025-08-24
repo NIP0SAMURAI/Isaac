@@ -1,3 +1,14 @@
+margin-bottom: 40px;
+margin-bottom: 40px;
+@media (max-width: 639px) {
+  .project-card {
+    max-width: 95vw;
+    width: 95vw;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 /* Publications filter UI styling */
 #publication-filter-form {
   border-radius: 0.9rem;
@@ -137,6 +148,10 @@
 .section-projects,
 .section-about,
 .section-contact {
+}
+
+.section-about {
+  margin-bottom: 80px;
   scroll-margin-top: 80px;
 }
 .section-publications,
@@ -209,8 +224,13 @@
 .project-list {
   margin-top: 2.5rem;
   display: grid;
-  gap: 1.5rem;
+  gap: 24px 3.5rem;
   grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .project-list {
+    gap: 1.5rem;
+  }
 }
 @media (min-width: 640px) {
   .project-list {
@@ -233,10 +253,30 @@
   border: 1px solid #e6ebe5;
   overflow: hidden;
   transition: box-shadow 0.2s, transform 0.2s;
+  margin: 0 auto;
+}
+@media (max-width: 639px) {
+  .project-card {
+    width: 95vw;
+    max-width: 95vw;
+    min-width: 0;
+  }
+}
+@media (min-width: 640px) {
+  .project-card {
+    transform: none;
+    margin: 0;
+  }
 }
 .project-card:hover {
   box-shadow: 0 16px 32px -8px #d6d6d691;
   transform: translateY(-2px) scale(1.02);
+}
+@media (max-width: 639px) {
+  .project-card:hover {
+    box-shadow: none;
+    transform: none;
+  }
 }
 .project-card-image {
   width: 100%;
