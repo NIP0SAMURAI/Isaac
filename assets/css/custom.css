@@ -1,12 +1,16 @@
-margin-bottom: 40px;
-margin-bottom: 40px;
 @media (max-width: 639px) {
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .project-card {
-    max-width: 95vw;
-    width: 95vw;
+    max-width: calc(100vw - 2rem);
+    width: calc(100vw - 2rem);
     min-width: 0;
     margin-left: auto;
     margin-right: auto;
+    display: block;
   }
 }
 /* Publications filter UI styling */
@@ -257,8 +261,8 @@ margin-bottom: 40px;
 }
 @media (max-width: 639px) {
   .project-card {
-    width: 95vw;
-    max-width: 95vw;
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
   }
 }
