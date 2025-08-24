@@ -356,9 +356,7 @@ function formatPeriod(period) {
     return `${(mIdx + 1).toString().padStart(2, "0")}.${y}`;
   };
   if (parts.length === 2) {
-    return `<span>${format(parts[0])}</span><br><span>${format(
-      parts[1]
-    )}</span>`;
+    return `<span>${format(parts[0])}</span>&nbsp;&nbsp;<span>${format(parts[1])}</span>`;
   } else {
     return `<span>${format(parts[0])}</span>`;
   }
@@ -369,13 +367,23 @@ function renderProjectCards(projects) {
   if (!list) return;
   list.innerHTML = "";
   projects.forEach((proj) => {
-    const tags = (proj["science tags"] || "")
+    // Group tags into paragraphs of 4
+    const tagArr = (proj["science tags"] || "")
       .split(";")
-      .map(
-        (t) =>
-          `<span class='inline-flex rounded-full bg-brand/10 text-brand px-2.5 py-1 text-[10px] font-semibold'>${t}</span>`
-      )
-      .join(" ");
+      .map((t) => t.trim())
+      .filter(Boolean);
+    let tags = "";
+    for (let i = 0; i < tagArr.length; i += 4) {
+      tags += `<p class='flex flex-wrap gap-2 mt-0 mb-0'>` +
+        tagArr
+          .slice(i, i + 4)
+          .map(
+            (t) =>
+              `<span class='inline-flex rounded-full bg-brand/10 text-brand px-2.5 py-1 text-[10px] font-semibold'>${t}</span>`
+          )
+          .join(" ") +
+        `</p>`;
+    }
     const dois = (proj["doi to articles that came out of the project"] || "")
       .split(";")
       .filter(Boolean)
