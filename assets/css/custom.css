@@ -1,3 +1,6 @@
+#publication-filter-form input#publication-search {
+  border-radius: 0.9rem !important;
+}
 @media (min-width: 768px) {
   nav a.nav-active[href="#contact"] {
     background-color: rgba(56, 105, 57, 0.05); /* brand/5 */
@@ -42,11 +45,34 @@
   align-items: center;
   background: none;
 }
-#publication-filter-form input,
-#publication-filter-form select {
-  border-radius: 0.7rem;
+@media (min-width: 640px) {
+  #publication-filter-form {
+    min-height: 56px;
+  }
+}
+}
+@media (min-width: 640px) {
+  #publication-filter-form {
+    min-height: 56px; /* Ensures consistent height for filter containers on desktop/tablet */
+  }
+}
+}
+#publication-filter-form input {
+  border-radius: 0.9rem !important;
   border: 1px solid #d1d5db;
-  background: #fff;
+  background: transparent;
+    color: #6b7280; /* No change needed, already matches */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+  flex-shrink: 1;
+}
+#publication-filter-form select {
+  border-radius: 0.9rem !important;
+  border: 1px solid #d1d5db;
+  background: transparent;
   color: #6b7280;
   padding: 0.5rem 1rem;
   font-size: 1rem;
