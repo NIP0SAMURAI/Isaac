@@ -356,7 +356,9 @@ function formatPeriod(period) {
     return `${(mIdx + 1).toString().padStart(2, "0")}.${y}`;
   };
   if (parts.length === 2) {
-    return `<span>${format(parts[0])}</span>&nbsp;&nbsp;<span>${format(parts[1])}</span>`;
+    return `<span>${format(parts[0])}</span>&nbsp;&nbsp;<span>${format(
+      parts[1]
+    )}</span>`;
   } else {
     return `<span>${format(parts[0])}</span>`;
   }
@@ -374,7 +376,8 @@ function renderProjectCards(projects) {
       .filter(Boolean);
     let tags = "";
     for (let i = 0; i < tagArr.length; i += 4) {
-      tags += `<p class='flex flex-wrap gap-2 mt-0 mb-0'>` +
+      tags +=
+        `<p class='flex flex-wrap gap-2 mt-0 mb-0'>` +
         tagArr
           .slice(i, i + 4)
           .map(

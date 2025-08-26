@@ -1,3 +1,11 @@
+/* Ensure project card date never touches theme labels */
+.project-card
+  .flex.items-center.justify-between
+  > span.text-xs.text-neutral-500 {
+  margin-top: 8px;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
 @media (max-width: 639px) {
   .project-list {
     display: flex;
@@ -109,7 +117,8 @@
   border: 1px solid #e5e7eb;
   background-color: #fff;
   overflow: hidden;
-  margin: 0 !important; /* Remove any margin, use grid gap only */
+  margin: 0 !important; /* Remove extra space below each card */
+  min-height: 420px;
   position: relative;
   padding: 0; /* No outer padding, use inner for content */
 }
