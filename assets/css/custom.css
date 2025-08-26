@@ -236,8 +236,6 @@
 }
 
 .section-contact {
-  border-top: 1px solid #e5e7eb;
-  border-bottom: 1px solid #e5e7eb;
   padding-top: 2rem !important;
 }
 
@@ -390,10 +388,10 @@
 .site-footer {
   padding-top: 0.75rem;
   padding-bottom: calc(0.75rem + 8px);
-  margin-top: 0.5rem;
+  margin-top: 0 !important;
 }
 .footer-white {
-  background: #fff !important;
+  background: #f5faf7 !important;
 }
 .footer-content {
   margin-left: auto;
