@@ -1,3 +1,11 @@
+@media (min-width: 768px) {
+  nav a.nav-active[href="#contact"] {
+    background-color: rgba(56, 105, 57, 0.05); /* brand/5 */
+    border: 1px solid #b6d2b8; /* brand/30, approximate */
+    border-radius: 9999px;
+    font-weight: 600 !important;
+  }
+}
 /* Ensure project card date never touches theme labels */
 .project-card
   .flex.items-center.justify-between

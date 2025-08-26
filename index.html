@@ -711,6 +711,21 @@
           if (nearBottom && contactLink) {
             contactLink.classList.add('nav-active');
           } else {
+            // Only highlight Publications if actually in the section (not at very top)
+            if (currentSection.id === 'publications') {
+              const pubSection = document.getElementById('publications');
+              if (scrollPos + offset >= pubSection.offsetTop) {
+                navLinks.forEach(link => {
+                  if (link.getAttribute('href') === '#publications') {
+                    link.classList.add('nav-active');
+                  }
+                });
+                return;
+              } else {
+                // Not in publications section yet
+                return;
+              }
+            }
             navLinks.forEach(link => {
               if (link.getAttribute('href') === '#' + currentSection.id) {
                 link.classList.add('nav-active');
