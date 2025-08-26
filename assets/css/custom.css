@@ -168,6 +168,10 @@
   scroll-margin-top: 80px;
 }
 .section-publications,
+.section-projects {
+  scroll-margin-top: 80px;
+}
+.section-publications,
 .section-projects,
 .section-about,
 .section-contact {

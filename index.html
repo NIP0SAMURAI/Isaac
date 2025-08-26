@@ -687,10 +687,11 @@
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
     <script>
-      // Scroll spy for navigation highlighting
+      // Scroll spy for navigation highlighting, including Contact at page bottom
       document.addEventListener('DOMContentLoaded', function () {
         const navLinks = document.querySelectorAll('nav a[href^="#"]');
         const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+        const contactLink = Array.from(navLinks).find(link => link.getAttribute('href') === '#contact');
         function onScroll() {
           let scrollPos = window.scrollY || window.pageYOffset;
           let offset = 120; // adjust for header height
@@ -700,12 +701,22 @@
               currentSection = section;
             }
           }
+          // If at (or near) bottom, force Contact active
+          const scrollBottom = window.innerHeight + window.scrollY;
+          const docHeight = document.documentElement.scrollHeight;
+          const nearBottom = docHeight - scrollBottom < 10;
           navLinks.forEach(link => {
             link.classList.remove('nav-active');
-            if (link.getAttribute('href') === '#' + currentSection.id) {
-              link.classList.add('nav-active');
-            }
           });
+          if (nearBottom && contactLink) {
+            contactLink.classList.add('nav-active');
+          } else {
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === '#' + currentSection.id) {
+                link.classList.add('nav-active');
+              }
+            });
+          }
         }
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
