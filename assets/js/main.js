@@ -402,7 +402,7 @@ function renderProjectCards(projects) {
           /"/g,
           ""
         )}" loading="lazy" class="w-full h-full object-cover">`
-      : `<img src="assets/images/projectcardtemplate.jpg" alt="Project image" loading="lazy" class="w-full h-full object-cover">`;
+      : `<img src="assets/images/template.jpg" alt="Project image" loading="lazy" class="w-full h-full object-cover">`;
 
     list.innerHTML += `
         <article class="project-card rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-soft relative">\n        <div class="aspect-[16/10] overflow-hidden">${imageHtml}</div>\n        <div class="p-5">\n          <div class="flex flex-col items-start gap-0">\n            <h3 class="text-lg font-semibold">${
