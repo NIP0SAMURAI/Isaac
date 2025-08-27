@@ -402,19 +402,7 @@ function renderProjectCards(projects) {
           /"/g,
           ""
         )}" loading="lazy" class="w-full h-full object-cover">`
-      : `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" class="w-full h-full object-cover">
-            <defs>
-              <linearGradient id="gradA" x1="0" x2="1">
-                <stop offset="0%" stop-color="#386939" />
-                <stop offset="100%" stop-color="#4e8b52" />
-              </linearGradient>
-            </defs>
-            <rect width="1600" height="1000" fill="url(#gradA)" />
-            <g fill="white" font-family="Inter, system-ui, sans-serif" text-anchor="middle">
-              <text x="800" y="520" font-size="220" font-weight="800" opacity="0.95">QDG</text>
-            </g>
-          </svg>`;
+      : `<img src="assets/images/projectcardtemplate.jpg" alt="Project image" loading="lazy" class="w-full h-full object-cover">`;
 
     list.innerHTML += `
         <article class="project-card rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-soft relative">\n        <div class="aspect-[16/10] overflow-hidden">${imageHtml}</div>\n        <div class="p-5">\n          <div class="flex flex-col items-start gap-0">\n            <h3 class="text-lg font-semibold">${
