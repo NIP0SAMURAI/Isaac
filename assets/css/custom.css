@@ -120,11 +120,11 @@
 }
 /* Force 32px margin above see-less-publications button */
 #see-less-publications {
-  margin-top: 32px !important;
+  margin-top: 48px !important;
 }
 /* Force 32px margin above show-more-publications button */
 #show-more-publications {
-  margin-top: 32px !important;
+  margin-top: 48px !important;
 }
 /* Responsive name for top left corner */
 .name-short {
@@ -181,12 +181,14 @@
   .container {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+
   }
 }
 @media (max-width: 639px) {
   .container {
     padding-left: 2rem;
     padding-right: 2rem;
+      padding-bottom: 4rem;
   }
 }
 @media (min-width: 1024px) {
@@ -197,11 +199,7 @@
 }
 
 /* Section spacing */
-.section-publications,
-.section-projects,
-.section-about,
-.section-contact {
-}
+
 
 .section-about {
   margin-bottom: 80px;

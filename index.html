@@ -99,7 +99,7 @@
         aria-label="Intro"
         class="relative overflow-hidden pt-8"
       >
-  <div class="container pt-4 pb-8 md:pt-8 md:pb-12">
+  <div class="container pt-4 pb-14 md:pt-8 md:pb-12">
           <div class="flex flex-col lg:flex-row gap-10 intro-align-fix">
             <div class="order-2 lg:order-1 px-0">
               <div class="section-header">
@@ -138,7 +138,7 @@
                     </svg>
                   </a>
                   <a
-                    href="Documents/CV_Isaac_Appelquist_2025_08_08.pdf"
+                    href="assets/documents/CV_Isaac_Appelquist_2025_08_08.pdf"
                     class="inline-flex items-center gap-2 rounded-full border border-brand/30 px-5 py-3 text-sm font-semibold text-brand hover:bg-brand/5"
                     >Download CV
                     <svg
@@ -182,7 +182,7 @@
             <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">
               Publications
             </h2>
-              <p class="mt-2 mb-4 text-neutral-700">
+              <p class="mt-2 mb-16 text-neutral-700">
                 The full selection of my peer-reviewed journal articles that I contributed to, conference contributions, and preprints in chemical engineering and nanotechnology.
               </p>
             </p>
@@ -379,7 +379,7 @@
         <div class="container">
           <div class="section-header">
             <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Projects</h2>
-            <p class="mt-2 text-neutral-700">Here are some of my ongoing and past research projects, spanning interdisciplinary collaborations and innovative solutions.</p>
+            <p class="mt-2 mb-16">Here are some of my ongoing and past research projects, spanning interdisciplinary collaborations and innovative solutions.</p>
           </div>
           <div class="project-list">
             <article class="project-card rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-soft">
@@ -485,6 +485,24 @@
                 <img class="hover-img hover-img--base" src="assets/images/aboutme.jpg" alt="About me image (base)" />
                 <img class="hover-img hover-img--hover" src="assets/images/hover.png" alt="Hero image (hover)" aria-hidden="true" />
               </div>
+              <!-- Education box for md+ screens -->
+              <div class="hidden md:block mt-8">
+                <h4 class="font-semibold">Education</h4>
+                <ul class="mt-2 text-sm text-neutral-700 list-disc pl-5">
+                  <li>
+                    Jan. 2020 – Apr. 2023: Ph. D. Chemical Engineering<br>
+                    Technical University of Denmark (DTU), Denmark, 01/04/2023
+                  </li>
+                  <li>
+                    Sep. 2017 – Jun. 2019: M. Sc. Engineering in Nanomaterials and Nanophysics<br>
+                    Aalborg University (AAU), Denmark
+                  </li>
+                  <li>
+                    Sep. 2014 – Jun. 2017: B. Sc. Nanoscience<br>
+                    Aalborg University (AAU), Denmark
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="about-info-col space-y-6">
               <p class="text-neutral-700 leading-relaxed">
@@ -515,7 +533,8 @@
                   Sed do
                 </p>
               </div>
-              <div>
+              <!-- Education box for small screens -->
+              <div class="block md:hidden">
                 <h4 class="font-semibold">Education</h4>
                 <ul class="mt-2 text-sm text-neutral-700 list-disc pl-5">
                   <li>
@@ -549,7 +568,7 @@
 
       <!-- Contact section -->
   <section id="contact" class="section-contact pt-12">
-        <div class="container">
+        <div class="container"
           <div class="section-header">
             <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">
               Contact
@@ -559,7 +578,7 @@
             </p>
           </div>
           <div class="contact-content">
-            <div class="md:col-span-2" style="padding-bottom:80px;">
+            <div class="md:col-span-2" style="padding-bottom:180px;">
               <div class="rounded-2xl border border-neutral-200 bg-white p-6">
                 <p class="text-sm text-neutral-700">
                   Isaac Appelqvist Løge<br />
@@ -583,12 +602,20 @@
                     >DTU Orbit</a>
                   <span class="mx-1">|</span>
                   <a
-                    href="Documents/CV_Isaac_Appelquist_2025_08_08.pdf"
+                    href="assets/documents/CV_Isaac_Appelquist_2025_08_08.pdf"
                     download
                     class="text-brand underline"
                   >
                     Download CV
                   </a>
+                   <span class="mx-1">|</span>
+                  <a
+                    href="assets/documents/Article_and_Conference_contributions_2025_08_08.pdf"
+                    download
+                    class="text-brand underline"
+                  >
+                    Contributions
+                    </a>
                 </p>
               </div>
             </div>
@@ -656,7 +683,7 @@
             </svg>
           </a>
           <a
-            href="https://www.instagram.com/isaacloge?igsh=OHd4eTFhaDM1YWFv"
+            href="https://www.youtube.com/@isaaclge3648"
             target="_blank"
             rel="noopener"
             class="text-brand hover:text-brand"
