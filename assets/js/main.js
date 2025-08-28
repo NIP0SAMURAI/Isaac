@@ -243,25 +243,23 @@ function renderPublicationCards(publications) {
       )
       .join(" ");
     list.innerHTML += `
-      <li class=\"publication-list-item\" style=\"${
-        i > 2 ? "display:none;" : ""
-      }\">\n        <article class=\"publication-card\">\n          <div class=\"flex flex-wrap items-center gap-2\">\n            <span class=\"inline-flex items-center rounded-full border border-neutral-300 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-600\">${
-      pub["type of publication"] || ""
-    }</span>\n            ${tags}\n            <span class=\"ml-auto text-xs text-neutral-500\">${
-      pub["year"] || ""
-    }</span>\n          </div>\n          <h3 class=\"mt-3 text-lg md:text-xl font-semibold\">${
-      pub["title"] || ""
-    }</h3>\n          <p class=\"mt-1 text-sm leading-relaxed text-neutral-700\">${
-      pub["authors"] || ""
-    } <span class=\"text-neutral-500\">(${
-      pub["year"] || ""
-    }).</span></p>\n          <div class=\"mt-4 flex flex-wrap gap-2\">\n            ${
-      pub["doi link"]
-        ? `<a href='${pub["doi link"]}' class='inline-flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-1.5 text-xs font-medium hover:bg-neutral-50' target='_blank' rel='noopener noreferrer'>DOI</a>`
-        : ""
-    }\n            <button class=\"btn-copy-citation inline-flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-1.5 text-xs font-medium hover:bg-neutral-50\" data-citation=\"${
-      pub["copy citation text"] || ""
-    }\">Copy citation</button>\n          </div>\n        </article>\n      </li>\n    `;
+      <li class="publication-list-item" style="${i > 2 ? "display:none;" : ""}">
+        <article class="publication-card" style="position:relative;">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center rounded-full border border-neutral-300 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-600">${pub["type of publication"] || ""}</span>
+            ${tags}
+            <span class="ml-auto text-xs text-neutral-500">${pub["year"] || ""}</span>
+          </div>
+          <h3 class="mt-3 text-lg md:text-xl font-semibold">${pub["title"] || ""}</h3>
+          <p class="mt-1 text-sm leading-relaxed text-neutral-700">${pub["authors"] || ""} <span class="text-neutral-500">(${pub["year"] || ""}).</span></p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            ${pub["doi link"] ? `<a href='${pub["doi link"]}' class='inline-flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-1.5 text-xs font-medium hover:bg-neutral-50' target='_blank' rel='noopener noreferrer'>DOI</a>` : ""}
+            <button class="btn-copy-citation inline-flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-1.5 text-xs font-medium hover:bg-neutral-50" data-citation="${pub["copy citation text"] || ""}">Copy citation</button>
+          </div>
+          <span style="position:absolute; bottom:1rem; right:1.2rem; font-size:12px; color:#386939; font-weight:600;">${pub["number of citations"] && pub["number of citations"] !== "0" ? `Citations: ${pub["number of citations"]}` : ""}</span>
+        </article>
+      </li>
+    `;
   });
   // Add or update the Show more button with dynamic count
   let btn = document.getElementById("show-more-publications");
