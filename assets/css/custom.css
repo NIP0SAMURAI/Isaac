@@ -9,6 +9,14 @@
     font-weight: 600 !important;
   }
 }
+@media (max-width: 767px) {
+  nav a.nav-active[href="#contact"] {
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-weight: 600 !important;
+  }
+}
 /* Ensure project card date never touches theme labels */
 .project-card
   .flex.items-center.justify-between
@@ -50,18 +58,23 @@
     min-height: 56px;
   }
 }
-}
-@media (min-width: 640px) {
-  #publication-filter-form {
-    min-height: 56px; /* Ensures consistent height for filter containers on desktop/tablet */
-  }
-}
+#publication-filter-form input {
+  border-radius: 0.9rem !important;
+  border: 1px solid #d1d5db;
+  background: transparent;
+  color: #6b7280; /* No change needed, already matches */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+  flex-shrink: 1;
 }
 #publication-filter-form input {
   border-radius: 0.9rem !important;
   border: 1px solid #d1d5db;
   background: transparent;
-    color: #6b7280; /* No change needed, already matches */
+  color: #6b7280; /* No change needed, already matches */
   padding: 0.5rem 1rem;
   font-size: 1rem;
   outline: none;
@@ -120,19 +133,11 @@
 }
 /* Force 32px margin above see-less-publications button */
 #see-less-publications {
-<<<<<<< HEAD
-  margin-top: 48px !important;
-}
-/* Force 32px margin above show-more-publications button */
-#show-more-publications {
-  margin-top: 48px !important;
-=======
   margin-top: 40px !important;
 }
 /* Force 32px margin above show-more-publications button */
 #show-more-publications {
   margin-top: 40px !important;
->>>>>>> e064e8c (Restore all files to last pushed state)
 }
 /* Responsive name for top left corner */
 .name-short {
@@ -189,14 +194,13 @@
   .container {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-
   }
 }
 @media (max-width: 639px) {
   .container {
     padding-left: 2rem;
     padding-right: 2rem;
-      padding-bottom: 4rem;
+    padding-bottom: 4rem;
   }
 }
 @media (min-width: 1024px) {
@@ -205,12 +209,6 @@
     padding-right: 2rem;
   }
 }
-
-<<<<<<< HEAD
-/* Section spacing */
-
-=======
->>>>>>> e064e8c (Restore all files to last pushed state)
 
 .section-about {
   margin-bottom: 80px;
