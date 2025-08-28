@@ -1,7 +1,7 @@
 #publication-filter-form input#publication-search {
   border-radius: 0.9rem !important;
 }
-@media (min-width: 768px) {
+@media (min-width: 1px) {
   nav a.nav-active[href="#contact"] {
     background-color: rgba(56, 105, 57, 0.05); /* brand/5 */
     border: 1px solid #b6d2b8; /* brand/30, approximate */
@@ -120,11 +120,19 @@
 }
 /* Force 32px margin above see-less-publications button */
 #see-less-publications {
+<<<<<<< HEAD
   margin-top: 48px !important;
 }
 /* Force 32px margin above show-more-publications button */
 #show-more-publications {
   margin-top: 48px !important;
+=======
+  margin-top: 40px !important;
+}
+/* Force 32px margin above show-more-publications button */
+#show-more-publications {
+  margin-top: 40px !important;
+>>>>>>> e064e8c (Restore all files to last pushed state)
 }
 /* Responsive name for top left corner */
 .name-short {
@@ -198,8 +206,11 @@
   }
 }
 
+<<<<<<< HEAD
 /* Section spacing */
 
+=======
+>>>>>>> e064e8c (Restore all files to last pushed state)
 
 .section-about {
   margin-bottom: 80px;
@@ -226,7 +237,7 @@
   .section-projects,
   .section-about,
   .section-contact {
-    padding-top: 2rem;
+    padding-top: 6rem;
     padding-bottom: 2rem;
   }
 
