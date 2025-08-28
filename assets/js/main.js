@@ -395,8 +395,14 @@ function renderProjectCards(projects) {
           `<a href='${doi}' class='inline-flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-1.5 text-xs font-medium hover:bg-neutral-50' target='_blank' rel='noopener noreferrer'>DOI</a>`
       )
       .join(" ");
-    // image: prefer 'image' or 'image url' column from CSV
-    const imgUrl = (proj["image"] || proj["image url"] || "").trim();
+    // image: prefer 'images' column, then 'image', then 'image url'
+    const imgUrl = (
+      proj["images"] ||
+      proj["image"] ||
+      proj["image url"] ||
+      ""
+    ).trim();
+    console.log("Project:", proj["title"], "| Image URL:", imgUrl);
     const imageHtml = imgUrl
       ? `<img src="${imgUrl}" alt="${(proj["title"] || "").replace(
           /"/g,
