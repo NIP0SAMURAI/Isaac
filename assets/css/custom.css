@@ -3,7 +3,7 @@
 }
 @media (min-width: 1px) {
   nav a.nav-active[href="#contact"] {
-    background-color: rgba(56, 105, 57, 0.05); /* brand/5 */
+    background-color: rgba(57, 106, 58, 0.051); /* brand/5 */
     border: 1px solid #b6d2b8; /* brand/30, approximate */
     border-radius: 9999px;
     font-weight: 600 !important;
