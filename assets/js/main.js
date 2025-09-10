@@ -245,8 +245,14 @@ function renderPublicationCards(publications) {
     const doiLink = pub["doi link"] ? pub["doi link"] : null;
     list.innerHTML += `
       <li class="publication-list-item" style="${i > 2 ? "display:none;" : ""}">
-        <article class="publication-card" style="position:relative;" data-doi="${doiLink ? encodeURIComponent(doiLink) : ''}">
-          ${doiLink ? `<div class="publication-card-bg-link" style="position:absolute;inset:0;z-index:1;cursor:pointer;"></div>` : ''}
+        <article class="publication-card" style="position:relative;" data-doi="${
+          doiLink ? encodeURIComponent(doiLink) : ""
+        }">
+          ${
+            doiLink
+              ? `<div class="publication-card-bg-link" style="position:absolute;inset:0;z-index:1;cursor:pointer;"></div>`
+              : ""
+          }
           <div class="flex flex-wrap items-center gap-2" style="position:relative;z-index:2;">
             <span class="inline-flex items-center rounded-full border border-neutral-300 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-600">${
               pub["type of publication"] || ""
@@ -348,13 +354,13 @@ function renderPublicationCards(publications) {
   document.querySelectorAll(".publication-card[data-doi]").forEach((card) => {
     const doi = card.getAttribute("data-doi");
     if (doi) {
-      const bgLink = card.querySelector('.publication-card-bg-link');
+      const bgLink = card.querySelector(".publication-card-bg-link");
       if (bgLink) {
         bgLink.addEventListener("click", function (e) {
           window.open(decodeURIComponent(doi), "_blank");
         });
         // Allow text selection on the rest of the card
-        bgLink.addEventListener("mousedown", function(e) {
+        bgLink.addEventListener("mousedown", function (e) {
           // Only trigger if not selecting text
           if (e.detail > 1) e.preventDefault();
         });
@@ -394,7 +400,9 @@ function formatPeriod(period) {
   };
   if (parts.length === 2) {
     // Always show a dash between the dates
-    return `<span>${format(parts[0])}</span> - <span>${format(parts[1])}</span>`;
+    return `<span>${format(parts[0])}</span> - <span>${format(
+      parts[1]
+    )}</span>`;
   } else {
     return `<span>${format(parts[0])}</span>`;
   }
