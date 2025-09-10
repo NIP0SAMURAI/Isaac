@@ -242,10 +242,12 @@ function renderPublicationCards(publications) {
           `<span class='inline-flex rounded-full bg-brand/10 text-brand px-2.5 py-1 text-[10px] font-semibold'>${t}</span>`
       )
       .join(" ");
+    const doiLink = pub["doi link"] ? pub["doi link"] : null;
     list.innerHTML += `
       <li class="publication-list-item" style="${i > 2 ? "display:none;" : ""}">
-        <article class="publication-card" style="position:relative;">
-          <div class="flex flex-wrap items-center gap-2">
+        <article class="publication-card" style="position:relative;" data-doi="${doiLink ? encodeURIComponent(doiLink) : ''}">
+          ${doiLink ? `<div class="publication-card-bg-link" style="position:absolute;inset:0;z-index:1;cursor:pointer;"></div>` : ''}
+          <div class="flex flex-wrap items-center gap-2" style="position:relative;z-index:2;">
             <span class="inline-flex items-center rounded-full border border-neutral-300 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-600">${
               pub["type of publication"] || ""
             }</span>
@@ -254,23 +256,23 @@ function renderPublicationCards(publications) {
               pub["year"] || ""
             }</span>
           </div>
-          <h3 class="mt-3 text-lg md:text-xl font-semibold">${
+          <h3 class="mt-3 text-lg md:text-xl font-semibold" style="position:relative;z-index:2;">${
             pub["title"] || ""
           }</h3>
-          <p class="mt-1 text-sm leading-relaxed text-neutral-700">${
+          <p class="mt-1 text-sm leading-relaxed text-neutral-700" style="position:relative;z-index:2;">${
             pub["authors"] || ""
           } <span class="text-neutral-500">(${pub["year"] || ""}).</span></p>
-          <div class="mt-4 flex flex-wrap gap-2">
+          <div class="mt-4 flex flex-wrap gap-2" style="position:relative;z-index:2;">
             ${
-              pub["doi link"]
-                ? `<a href='${pub["doi link"]}' class='inline-flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-1.5 text-xs font-medium hover:bg-neutral-50' target='_blank' rel='noopener noreferrer'>DOI</a>`
+              doiLink
+                ? `<a href='${doiLink}' class='inline-flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-1.5 text-xs font-medium hover:bg-neutral-50' target='_blank' rel='noopener noreferrer'>DOI</a>`
                 : ""
             }
             <button class="btn-copy-citation inline-flex items-center gap-1.5 rounded-full border border-neutral-300 px-2.5 py-1.5 text-xs font-medium hover:bg-neutral-50" data-citation="${
               pub["copy citation text"] || ""
             }">Copy citation</button>
           </div>
-          <span style="position:absolute; bottom:1rem; right:1.2rem; font-size:12px; color:#386939; font-weight:600;">${
+          <span style="position:absolute; bottom:1rem; right:1.2rem; font-size:12px; color:#386939; font-weight:600;z-index:2;">${
             pub["number of citations"] && pub["number of citations"] !== "0"
               ? `Citations: ${pub["number of citations"]}`
               : ""
@@ -332,7 +334,8 @@ function renderPublicationCards(publications) {
   }
   // Re-attach copy citation listeners
   document.querySelectorAll(".btn-copy-citation").forEach((btn) => {
-    btn.addEventListener("click", async () => {
+    btn.addEventListener("click", async (e) => {
+      e.stopPropagation();
       try {
         await navigator.clipboard.writeText(btn.dataset.citation || "");
         btn.textContent = "Copied!";
@@ -340,11 +343,29 @@ function renderPublicationCards(publications) {
       } catch {}
     });
   });
+
+  // Make only the background of the publication card clickable if DOI link exists
+  document.querySelectorAll(".publication-card[data-doi]").forEach((card) => {
+    const doi = card.getAttribute("data-doi");
+    if (doi) {
+      const bgLink = card.querySelector('.publication-card-bg-link');
+      if (bgLink) {
+        bgLink.addEventListener("click", function (e) {
+          window.open(decodeURIComponent(doi), "_blank");
+        });
+        // Allow text selection on the rest of the card
+        bgLink.addEventListener("mousedown", function(e) {
+          // Only trigger if not selecting text
+          if (e.detail > 1) e.preventDefault();
+        });
+      }
+    }
+  });
 }
 
 function formatPeriod(period) {
   if (!period) return "";
-  // Try to match ranges like 'Jun 2025 – Jun 2027' or 'Feb 2021 – Jul 2021'
+  // Try to match ranges like 'Jun 2025 – Jun 2027' or 'Feb 2021 - Jul 2021'
   const parts = period.split(/–|-/).map((p) => p.trim());
   const format = (str) => {
     // Match e.g. 'Jun 2025', 'Jul. 2021', 'Jun. 21', 'Jun 21', 'Jun.2021'
@@ -372,9 +393,8 @@ function formatPeriod(period) {
     return `${(mIdx + 1).toString().padStart(2, "0")}.${y}`;
   };
   if (parts.length === 2) {
-    return `<span>${format(parts[0])}</span>&nbsp;&nbsp;<span>${format(
-      parts[1]
-    )}</span>`;
+    // Always show a dash between the dates
+    return `<span>${format(parts[0])}</span> - <span>${format(parts[1])}</span>`;
   } else {
     return `<span>${format(parts[0])}</span>`;
   }
