@@ -454,20 +454,59 @@ function renderProjectCards(projects) {
         )}" loading="lazy" class="w-full h-full object-cover">`
       : `<img src="assets/images/template.jpg" alt="Project image" loading="lazy" class="w-full h-full object-cover">`;
 
+    // Add a background link if 'project link' field exists
+    const projectLink = proj["project link"] || "";
     list.innerHTML += `
-        <article class="project-card rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-soft relative">\n        <div class="aspect-[16/10] overflow-hidden">${imageHtml}</div>\n        <div class="p-5">\n          <div class="flex flex-col items-start gap-0">\n            <h3 class="text-lg font-semibold">${
-      proj["title"] || ""
-    }</h3>\n          </div>\n          <div class="flex items-center justify-between mt-1">\n            <span class="text-xs text-neutral-500">${
-      proj["role"] || ""
-    }</span>\n            <span class="text-xs text-neutral-500">${
-      proj["budget"] || ""
-    }</span>\n          </div>\n          <div class="mt-2 text-sm text-neutral-700">${
-      proj["very short description"] || ""
-    }</div>\n          <div class="mt-2 text-xs text-neutral-500">${
-      proj["tl;dr"] || ""
-    }</div>\n          <div class="mt-3 flex flex-wrap gap-2">${tags}</div>\n          <div class="mt-4 flex flex-wrap gap-2">${dois}</div>\n          <span class="absolute bottom-4 right-5 text-[10px] text-neutral-400">${formatPeriod(
-      proj["period"] || ""
-    )}</span>\n        </div>\n      </article>\n    `;
+        <article class="project-card rounded-2xl border border-neutral-200 bg-white overflow-hidden shadow-soft relative">
+          ${
+            projectLink
+              ? `<div class="project-card-bg-link" style="position:absolute;inset:0;z-index:2;cursor:pointer;"></div>`
+              : ""
+          }
+          <div class="aspect-[16/10] overflow-hidden">${imageHtml}</div>
+          <div class="p-5">
+            <div class="flex flex-col items-start gap-0">
+              <h3 class="text-lg font-semibold">${proj["title"] || ""}</h3>
+            </div>
+            <div class="flex items-center justify-between mt-1">
+              <span class="text-xs text-neutral-500">${
+                proj["role"] || ""
+              }</span>
+              <span class="text-xs text-neutral-500">${
+                proj["budget"] || ""
+              }</span>
+            </div>
+            <div class="mt-2 text-sm text-neutral-700">${
+              proj["very short description"] || ""
+            }</div>
+            <div class="mt-2 text-xs text-neutral-500">${
+              proj["tl;dr"] || ""
+            }</div>
+            <div class="mt-3 flex flex-wrap gap-2">${tags}</div>
+            <div class="mt-4 flex flex-wrap gap-2">${dois}</div>
+            <span class="absolute bottom-4 right-5 text-[10px] text-neutral-400">${formatPeriod(
+              proj["period"] || ""
+            )}</span>
+          </div>
+        </article>
+      `;
+    // Make only the background of the project card clickable if project link exists
+    document
+      .querySelectorAll(".project-card-bg-link")
+      .forEach((bgLink, idx) => {
+        const card = bgLink.closest(".project-card");
+        // Find the corresponding project from the rendered list
+        const project = projects[idx];
+        if (project && project["project link"]) {
+          bgLink.addEventListener("click", function (e) {
+            window.open(project["project link"], "_blank");
+          });
+          // Allow text selection on the rest of the card
+          bgLink.addEventListener("mousedown", function (e) {
+            if (e.detail > 1) e.preventDefault();
+          });
+        }
+      });
   });
 }
 
