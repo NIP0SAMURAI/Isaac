@@ -97,7 +97,7 @@
 #publication-filter-form input:focus,
 #publication-filter-form select:focus {
   border-color: #d1d5db;
-  box-shadow: none;
+  box-shas: none;
 }
 #publication-filter-form option {
   color: #6b7280;
