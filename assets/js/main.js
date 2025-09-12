@@ -1,3 +1,25 @@
+// Enable clicking the Popular Science stat to filter publications
+document.addEventListener("DOMContentLoaded", function () {
+  var statLink = document.getElementById("popular-science-stat-link");
+  var pubType = document.getElementById("publication-type");
+  if (statLink && pubType) {
+    statLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      // Set filter to 'Popular science' (case-insensitive match)
+      for (var i = 0; i < pubType.options.length; i++) {
+        if (pubType.options[i].text.toLowerCase().includes("popular science")) {
+          pubType.selectedIndex = i;
+          break;
+        }
+      }
+      // Trigger filter and scroll
+      if (typeof filterAndRenderPublications === "function")
+        filterAndRenderPublications();
+      var pubSection = document.getElementById("publications");
+      if (pubSection) pubSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+});
 const menuBtn = document.getElementById("menuBtn");
 const mobileNav = document.getElementById("mobile-nav");
 if (menuBtn && mobileNav) {

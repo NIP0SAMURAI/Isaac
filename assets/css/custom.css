@@ -1,3 +1,7 @@
+/* Reduce vertical spacing between project card title and paragraph */
+.project-card h3 {
+  margin-bottom: 0.7rem;
+}
 #publication-filter-form input#publication-search {
   border-radius: 0.9rem !important;
 }
