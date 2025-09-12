@@ -1,3 +1,8 @@
+/* Remove focus outline from stat-card links after click */
+a.stat-card:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 /* Reduce vertical spacing between project card title and paragraph */
 .project-card h3 {
   margin-bottom: 0.7rem;
@@ -101,7 +106,6 @@
 #publication-filter-form input:focus,
 #publication-filter-form select:focus {
   border-color: #d1d5db;
-  box-shas: none;
 }
 #publication-filter-form option {
   color: #6b7280;
