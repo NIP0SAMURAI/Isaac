@@ -100,9 +100,9 @@ const PUBLICATIONS_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpy8UGMjNjCFR8st9O_evmj6raZZ7oLxX1J8likDojqbowDqkRD7m28v3_RX62p3e1mw0OD3DZckAl/pub?gid=0&single=true&output=csv";
 const PROJECTS_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpy8UGMjNjCFR8st9O_evmj6raZZ7oLxX1J8likDojqbowDqkRD7m28v3_RX62p3e1mw0OD3DZckAl/pub?gid=339520638&single=true&output=csv";
-// Stats CSV (Google Sheet "stats" tab)
+// Stats CSV (Google Sheet "stats" tab) – uses the provided sheet ID + gid
 const STATS_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQpy8UGMjNjCFR8st9O_evmj6raZZ7oLxX1J8likDojqbowDqkRD7m28v3_RX62p3e1mw0OD3DZckAl/pub?gid=1273420121&single=true&output=csv";
+  "https://docs.google.com/spreadsheets/d/14b6OlmIHCes0WL8tbuBTGGr6A67BYnzMrjMy8be8q6U/export?format=csv&gid=1273420121";
 
 // Robust CSV parser that handles quoted fields and commas
 function parseCSV(text) {
@@ -147,51 +147,55 @@ function parseCSV(text) {
 
 let allPublications = [];
 async function fetchAndRenderPublications() {
-
-// Fetch and apply About Me stats from Google Sheets
-async function fetchAndApplyStats() {
-  try {
-    const res = await fetch(STATS_CSV_URL);
-    if (!res.ok) return;
-    const text = await res.text();
-    const rows = parseCSV(text);
-    if (!rows.length) return;
-    // Expect two columns: key, value; first row may be data (all-caps keys)
-    const data = rows.map((r) => ({ key: (r[0] || "").trim(), value: (r[1] || "").trim() }));
-    // Normalize keys to lowercase with underscores
-    const map = {};
-    data.forEach(({ key, value }) => {
-      if (!key) return;
-      const norm = key
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_|_$/g, "");
-      map[norm] = value;
-    });
-    // Apply to elements with data-stat
-    document.querySelectorAll("[data-stat]").forEach((el) => {
-      const key = el.getAttribute("data-stat");
-      if (!key) return;
-      const raw = map[key];
-      if (raw == null) return;
-      const num = Number(raw);
-      el.setAttribute("data-countup", isNaN(num) ? String(raw) : String(num));
-      // Start from 0 to animate if numeric, otherwise set raw text
-      el.textContent = isNaN(num) ? String(raw) : "0";
-    });
-    // Re-run countups
-    if (typeof setupCountUps === "function") setupCountUps();
-  } catch (e) {
-    console.error("Failed to load stats CSV", e);
+  // Fetch and apply About Me stats from Google Sheets
+  async function fetchAndApplyStats() {
+    try {
+      const res = await fetch(STATS_CSV_URL, { cache: "no-store" });
+      if (!res.ok) return;
+      const text = await res.text();
+      // Robust parse for simple two-column CSV without headers: KEY,VALUE per line
+      const lines = text
+        .split(/\r?\n/)
+        .map((l) => l.trim())
+        .filter((l) => l.length > 0);
+      const map = {};
+      lines.forEach((line) => {
+        const commaIdx = line.indexOf(",");
+        if (commaIdx === -1) return;
+        const rawKey = line.slice(0, commaIdx).trim();
+        const rawVal = line.slice(commaIdx + 1).trim();
+        const norm = rawKey
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "_")
+          .replace(/^_|_$/g, "");
+        map[norm] = rawVal;
+      });
+      // Apply to elements with data-stat
+      document.querySelectorAll("[data-stat]").forEach((el) => {
+        const key = el.getAttribute("data-stat");
+        if (!key) return;
+        const raw = map[key];
+        if (raw == null) return;
+        const num = Number(raw);
+        el.setAttribute("data-countup", isNaN(num) ? String(raw) : String(num));
+        // Start from 0 to animate if numeric, otherwise set raw text
+        el.textContent = isNaN(num) ? String(raw) : "0";
+      });
+      // Re-run countups
+      if (typeof setupCountUps === "function") setupCountUps();
+    } catch (e) {
+      console.error("Failed to load stats CSV", e);
+    }
   }
-}
 
-// Kick off stats fetch on DOM ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", fetchAndApplyStats, { once: true });
-} else {
-  fetchAndApplyStats();
-}
+  // Kick off stats fetch on DOM ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fetchAndApplyStats, {
+      once: true,
+    });
+  } else {
+    fetchAndApplyStats();
+  }
   try {
     const res = await fetch(PUBLICATIONS_CSV_URL);
     if (!res.ok) throw new Error("Failed to fetch publications CSV");
