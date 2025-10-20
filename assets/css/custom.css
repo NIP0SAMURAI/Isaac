@@ -225,11 +225,11 @@ a.stat-card:focus {
 
 .section-about {
   margin-bottom: 80px;
-  scroll-margin-top: 80px;
+  scroll-margin-top: 56px; /* was 80px; scroll sections 24px higher */
 }
 .section-publications,
 .section-projects {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 56px; /* was 80px; scroll sections 24px higher */
 }
 .section-publications,
 .section-projects,
@@ -263,6 +263,7 @@ a.stat-card:focus {
 
 .section-contact {
   padding-top: 2rem !important;
+  scroll-margin-top: 56px; /* align with other sections */
 }
 
 /* Section header */
