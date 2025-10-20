@@ -1,3 +1,8 @@
+/* Global CSS variables used by components */
+:root {
+  --line: #e5e7eb; /* neutral-200 border color */
+  --radius: 16px; /* default rounded radius */
+}
 /* Remove focus outline from stat-card links after click */
 a.stat-card:focus {
   outline: none !important;
@@ -139,11 +144,11 @@ a.stat-card:focus {
 .section-header {
   text-align: left !important;
 }
-/* Force 32px margin above see-less-publications button */
+/* Force 40px margin above see-less-publications button */
 #see-less-publications {
   margin-top: 40px !important;
 }
-/* Force 32px margin above show-more-publications button */
+/* Force 40px margin above show-more-publications button */
 #show-more-publications {
   margin-top: 40px !important;
 }
@@ -162,7 +167,7 @@ a.stat-card:focus {
     display: inline-block !important;
   }
 }
-/* Project card styles from reference */
+/* Project card styles (reference) */
 /* Project card exact spacing and margin fix */
 .project-card {
   transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
@@ -289,8 +294,6 @@ a.stat-card:focus {
 }
 
 /* Project list grid */
-/* Project list grid (rebuilt) */
-/* Project list grid from reference */
 .project-list {
   margin-top: 2.5rem;
   display: grid;
@@ -530,7 +533,7 @@ html:focus-within {
 }
 .hero-media {
   position: relative;
-  border: 2px dashed var(--line);
+  border: none;
   border-radius: var(--radius);
   /* Give the container an intrinsic size so absolutely-positioned images don't collapse it */
   width: 352px; /* +10% from 320 */
