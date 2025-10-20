@@ -7,9 +7,9 @@
   "theme_color": "#386939",
   "icons": [
     {
-      "src": "/assets/images/still.png",
+      "src": "/assets/images/still.jpg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/jpeg"
     }
   ]
 }
